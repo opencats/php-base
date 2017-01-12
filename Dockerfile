@@ -35,4 +35,4 @@ RUN echo "date.timezone='UTC'" > /usr/local/etc/php/conf.d/timezone.ini && \
         echo "realpath_cache_size = 4096k" >> /usr/local/etc/php/conf.d/cache.ini && \
         echo "realpath_cache_ttl = 7200" >> /usr/local/etc/php/conf.d/cache.ini
 WORKDIR /var/www
-ENTRYPOINT ["/opt/entrypoint.sh"]
+CMD ["/opt/entrypoint.sh"]
