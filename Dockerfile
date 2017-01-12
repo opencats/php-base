@@ -21,7 +21,7 @@ RUN cd ~ && \
   make && \
   make install
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j5 mysql gd ldap soap zip
+    && docker-php-ext-install -j5 mysql gd ldap soap zip opcache
 ADD scripts/install-composer.sh /opt/install-composer.sh
 ADD scripts/entrypoint.sh /opt/entrypoint.sh
 RUN dos2unix /opt/install-composer.sh && \
@@ -31,5 +31,8 @@ RUN dos2unix /opt/install-composer.sh && \
 ENV DOCKERIZE_VERSION v0.2.0
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-
+RUN echo "date.timezone='UTC'" > /usr/local/etc/php/conf.d/timezone.ini && \
+        echo "realpath_cache_size = 4096k" >> /usr/local/etc/php/conf.d/cache.ini && \
+        echo "realpath_cache_ttl = 7200" >> /usr/local/etc/php/conf.d/cache.ini
+WORKDIR /var/www
 ENTRYPOINT ["/opt/entrypoint.sh"]
