@@ -1,2 +1,2 @@
 #!/bin/sh
-chown -R root:root /var/www/ &&  php-fpm
+chown -R www-data:www-data /var/www/ &&  php-fpm
