@@ -33,6 +33,9 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 RUN echo "date.timezone='UTC'" > /usr/local/etc/php/conf.d/timezone.ini && \
         echo "realpath_cache_size = 4096k" >> /usr/local/etc/php/conf.d/cache.ini && \
-        echo "realpath_cache_ttl = 7200" >> /usr/local/etc/php/conf.d/cache.ini
+        echo "realpath_cache_ttl = 7200" >> /usr/local/etc/php/conf.d/cache.ini  && \
+        echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/error_log.ini  && \
+        echo "log_errors = On" >> /usr/local/etc/php/conf.d/error_log.ini && \
+        echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/error_log.ini
 WORKDIR /var/www
 CMD ["/opt/entrypoint.sh"]
