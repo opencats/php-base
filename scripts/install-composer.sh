@@ -6,7 +6,7 @@ ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
 
 if [ "$EXPECTED_SIGNATURE" == "$ACTUAL_SIGNATURE" ]
 then
-    php composer-setup.php --quiet
+    php composer-setup.php --quiet --version=1.3.1
     RESULT=$?
     rm composer-setup.php
     exit $RESULT
@@ -15,3 +15,4 @@ else
     rm composer-setup.php
     exit 1
 fi
+composer
