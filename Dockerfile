@@ -173,7 +173,8 @@ RUN echo "date.timezone = UTC" >> /usr/local/etc/php/conf.d/opencats.ini && \
      echo "realpath_cache_ttl = 7200" >> /usr/local/etc/php/conf.d/opencats.ini  && \
      echo "error_log = /dev/stderr" >> /usr/local/etc/php/conf.d/opencats.ini  && \
      echo "log_errors = On" >> /usr/local/etc/php/conf.d/opencats.ini && \
-     echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/opencats.ini
+     echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/opencats.ini && \
+     echo "opcache.max_accelerated_files = 20000" >> /usr/local/etc/php/conf.d/opencats.ini
 
 COPY ./files/nginx.conf /etc/nginx/nginx.conf
 COPY ./files/nginx.vh.template.conf /tmp/nginx.vh.template.conf
