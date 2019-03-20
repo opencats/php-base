@@ -1,8 +1,10 @@
-FROM php:5.6.27-fpm-alpine
+FROM php:7.2-fpm-alpine
 RUN apk upgrade --update && apk add \
   coreutils \
   freetype-dev \
   libjpeg-turbo-dev \
+  libxml2-dev \
+  openldap-dev \
   libltdl \
   libmcrypt-dev \
   libpng-dev \
@@ -21,7 +23,7 @@ RUN cd ~ && \
   make && \
   make install
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j5 mysql gd ldap soap zip
+    && docker-php-ext-install -j5 mysqli gd soap zip ldap
 ADD scripts/install-composer.sh /opt/install-composer.sh
 RUN dos2unix /opt/install-composer.sh && \
   chmod +x /opt/install-composer.sh && \
