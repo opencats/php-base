@@ -22,6 +22,8 @@ RUN cd ~ && \
   ./configure && \
   make && \
   make install
+RUN apk add libmcrypt-dev
+RUN pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j5 mysqli gd soap zip ldap
 ADD scripts/install-composer.sh /opt/install-composer.sh
@@ -32,3 +34,4 @@ RUN dos2unix /opt/install-composer.sh && \
 ENV DOCKERIZE_VERSION v0.2.0
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+RUN php -i | grep "mcrypt"
