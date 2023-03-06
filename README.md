@@ -4,9 +4,9 @@ Building a new version of php-base
 amend it
 then locally
 
-1148  git clone --depth 1 https://github.com/russh/php-base
- 1149  cd php-base/
- 1150  docker build -t russh/php-base:your-tag-goes-here .
+1148  git clone --depth 1 https://github.com/russh/php-base  
+ 1149  cd php-base/  
+ 1150  docker build -t russh/php-base:your-tag-goes-here .  
 
 Push it up to Docker hub
  1212  docker push russh/php-base:7.2-fpm-alpine
